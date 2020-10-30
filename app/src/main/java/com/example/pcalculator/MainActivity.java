@@ -1,19 +1,25 @@
 package com.example.pcalculator;
 
+import android.graphics.Color;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
-
 public class MainActivity extends AppCompatActivity {
+
+    private EditText edtEnterPercent;
+    private EditText edtEnterNumber;
+    private Button btnCalculate;
+    private TextView txtResult;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        edtEnterPercent =  (EditText)findViewById(R.id.edtEnterPercent);
+        edtEnterNumber =  (EditText)findViewById(R.id.edtEnterNumber);
+        btnCalculate = (Button) findViewById(R.id.btnCalculate);
+        txtResult = (TextView) findViewById(R.id.txtResult);
+
+        btnCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtResult.setBackgroundColor(Color.YELLOW);    //to change background color of result
+
+                float percentNumericValue = Float.parseFloat(edtEnterPercent.getText().toString());
+                float decimalValue = percentNumericValue / 100;
+                float result = decimalValue * Float.parseFloat(edtEnterNumber.getText().toString());
+                txtResult.setText(Float.toString(result));
+            }
+        });
 
 
     }
